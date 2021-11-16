@@ -14,4 +14,10 @@
 </head>
 <body>
 {% block head %}
+<div class="ui container">
+
+	<div class="ui fluid menu">
+		<a class="item" href="{{path('home')}}" data-target="._content">voir les listes</a>
+		<a class="item" href="{{path('Todos.addElement')}}" data-target="._content">Ajout d'une liste</a>
+	</div>
 {% endblock %}

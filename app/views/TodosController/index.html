@@ -1,0 +1,30 @@
+
+<div class="_content">
+    <h1>Affichage des lists</h1>
+    <div class="ui attached black inverted segment">
+        <div class="ui label">Not saved</div>
+    </div>
+    <div class="ui attached inverted segment">
+        <div class="ui list">
+            {% for item in list %}
+            <div class="item">
+                <form style="display: none;" class="ui inverted left floated form" action="{{path('todos.edit',[loop.index0])}}" method="post">
+                    <div class="ui inverted mini input">
+                        <input type="text" name="element" value="{{item}}">
+                    </div>
+                </form>
+                <div class="ui inverted checkbox">
+                    <input type="checkbox" name="example" id="ck{{loop.index0}}">
+                    <label class="_element" for="ck{{loop.index0}}" data-index="{{loop.index0}}">{{item}}</label>
+                    <div class="ui inverted divider"></div>
+                </div>
+                <a class="white right floated white"><i class="white edit icon _toEdit"></i></a>
+                <a class="white right floated white"><i class="trash alternate icon"></i></a>
+            </div>
+            {%else%}
+            <h1>Aucun élément</h1>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{{script_foot | raw}}
