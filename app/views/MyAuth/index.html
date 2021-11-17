@@ -1,51 +1,35 @@
-{% block _before %}
-<p></p>
-{% endblock %}
-{% block _form %}
-<form id="frm-login" class="ui form" name="frm-login" method="post" action="{{action}}">
-{% block _header %}
-<h4 class="ui header dividing">Connection</h4> 
-{% endblock %}
-{% block _fields %}
-<div class="two fields">
-	{% block _fieldLogin %}
-	<div class="field required">
-	<label for="{{loginInputName}}">{{loginLabel}}</label> 
-	<div class="ui input">
-		{% block _login %}
-		<input id="{{loginInputName}}" name="{{loginInputName}}" type="text" placeholder="{{loginLabel}}">
-		{% endblock %}
+<div class="_content">
+	<h1>Affichage des lists</h1>
+	<div class="ui attached black inverted segment">
+		<div class="ui label">Not saved</div>
 	</div>
-	</div>
-	{% endblock %}
-	{% block _fieldPassword %}
-	<div class="field required">
-		<label for="{{passwordInputName}}">{{passwordLabel}}</label>
-		<div class="ui input">
-			{% block _password %}
-			<input id="{{passwordInputName}}" name="{{passwordInputName}}" type="password">
-			{% endblock %}
-		</div>
-	</div>
-	{% endblock %}
-</div>
-{% block _extraFields %}
-	<div class="two fields">
-	{% block _fieldRemember %}
-		<div class="field">
-			<div class="ui checkbox">
-				<input id="ck-remember" name="ck-remember" value="1" type="checkbox" placeholder="Remember" tabindex="0" class="hidden"> 
-				<label for="ck-remember">{{rememberCaption}}</label>
+	<div class="ui attached inverted segment">
+		<div class="ui list">
+
+			{% for item in list %}
+			<div class="item">
+				<form style="display: none;" class="ui inverted left floated form _formEdit" action="{{path('todos.edit',[loop.index0])}}" method="post">
+					<div class="ui inverted mini input">
+						<input type="text" name="element" value="{{item}}" id="{{loop.index0}}">
+					</div>
+				</form>
+				<div class="ui inverted checkbox">
+					<input type="checkbox" name="example" id="ck{{loop.index0}}">
+					<label class="_element" for="ck{{loop.index0}}" data-index="{{loop.index0}}">{{item}}</label>
+					<div class="ui inverted divider"></div>
+				</div>
+				<div class="white right floated  _toEdit"><i class="white edit icon"></i></div>
+				<div class="right floated  _toDelete" data-value="{{loop.index0}}"><i class="trash alternate icon"></i></div>
+
+
 			</div>
+			{%else%}
+			<h1>Aucun élément</h1>
+			{% endfor %}
+
 		</div>
-	{% endblock %}
+
+
 	</div>
-{% endblock %}
-{% endblock %}
-{% block _buttons %}
-<button class="ui button green basic ajax _connect">Connection</button>
-{% endblock %}
-</form>
-{% endblock %}
-{% block _after %}
-{% endblock %}
+</div>
+{{script_foot | raw}}
