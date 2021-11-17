@@ -3,6 +3,8 @@ namespace controllers;
  use Ajax\php\ubiquity\JsUtils;
  use Ubiquity\attributes\items\router\Get;
  use Ubiquity\attributes\items\router\Post;
+ use Ubiquity\controllers\auth\AuthController;
+ use Ubiquity\controllers\auth\WithAuthTrait;
  use Ubiquity\controllers\Router;
  use Ubiquity\utils\http\URequest;
  use Ubiquity\utils\http\USession;
@@ -12,13 +14,17 @@ namespace controllers;
   * @property JsUtils jquery
   */
 class TodosController extends \controllers\ControllerBase{
-
+    use WithAuthTrait;
     const CACHE_KEY = 'datas/lists/';
     const EMPTY_LIST_ID='not saved';
     const LIST_SESSION_KEY='list';
     const ACTIVE_LIST_SESSION_KEY='active-list';
 
-    #[Get(path: "/default/",name: "home")]
+    private function showMessage(string $header, string $message, string $type = '', string $icon = 'info circle',array $buttons=[]) {
+        $this->loadView('main/message.html', compact('header', 'type', 'icon', 'message','buttons'));
+    }
+
+    #[Get(path: "#/_default/",name: "home")]
     public function index(){
         $list=USession::get('list', []);
         $this->jquery->click('._toEdit', 'let item=$(this).closest("div.item");
@@ -26,6 +32,7 @@ class TodosController extends \controllers\ControllerBase{
                                                             item.find(".checkbox").toggle();');
         $this->jquery->getOnClick('._toDelete',Router::path('Todos.deleteElement'),'._content',['hasLoader'=>'internal', 'attrs'=>'data-available']);
         $this->jquery->getHref('a', parameters: ['hasLoader' =>false, 'historize'=>false]);
+        $this->jquery->postOn('submit','.formEdit',Router::path('Todos.editElement'),'{id: $(this).find("input").attrs("id")}','._content',['hasLoader'=>'internal']);
         $this->jquery->renderView('TodosController/index.html', ['list'=>$list]);
     }
 
@@ -48,9 +55,10 @@ class TodosController extends \controllers\ControllerBase{
 
     #[Post(path: "todos/editElement/{index}",name: "Todos.editElement")]
     public function editElement($index){
-
-        USession::addValueToArray('list', URequest::post('items'));
-        $this->loadView('TodosController/editElement.html');
+        $list=USession::get(self::ACTIVE_LIST_SESSION_KEY);
+        $list[URequest::get('id')]=URequest::post('._formEdit');
+        USession::set(self::ACTIVE_LIST_SESSION_KEY,$list);
+        $this->index();
 
     }
 
@@ -87,4 +95,8 @@ class TodosController extends \controllers\ControllerBase{
 
     }
 
+    protected function getAuthController(): AuthController
+    {
+        return new MyAuth($this);
+    }
 }

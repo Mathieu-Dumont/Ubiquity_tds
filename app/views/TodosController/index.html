@@ -10,7 +10,7 @@
             <div class="item">
                 <form style="display: none;" class="ui inverted left floated form" action="{{path('todos.edit',[loop.index0])}}" method="post">
                     <div class="ui inverted mini input">
-                        <input type="text" name="element" value="{{item}}">
+                        <input type="text" name="element" value="{{item}}" id="{{loop.index0}}">
                     </div>
                 </form>
                 <div class="ui inverted checkbox">
@@ -18,8 +18,8 @@
                     <label class="_element" for="ck{{loop.index0}}" data-index="{{loop.index0}}">{{item}}</label>
                     <div class="ui inverted divider"></div>
                 </div>
-                <a class="white right floated white"><i class="white edit icon _toEdit"></i></a>
-                <a class="white right floated white"><i class="trash alternate icon"></i></a>
+                <div class="white right floated _toEdit"><i class="white edit icon"></i></div>
+                <div class="white right floated _toDelete" data-value="{{loop.index0}}"><i class="trash alternate icon"></i></div>
             </div>
             {%else%}
             <h1>Aucun élément</h1>

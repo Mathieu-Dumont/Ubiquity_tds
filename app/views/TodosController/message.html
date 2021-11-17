@@ -8,7 +8,7 @@
         {% if buttons %}
         <div class="ui divider"></div>
         {% for bt in buttons %}
-        <a href="{{ path(bt['url'][0],bt['url'][1]) }}" class="ui {{ bt['class'] }} inverted button">{{bt['caption']}}
+        <a href="{{ path(bt['url'][0],bt['url'][1]) }}" class="ui {{ bt['class'] }} inverted button">{{bt['caption']}}</a>
         {% endfor %}
         {% endif %}
     </div>
