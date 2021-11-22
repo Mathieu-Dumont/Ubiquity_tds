@@ -1,0 +1,24 @@
+{%  extends "OrgaController/base.html" %}
+{% block header %}
+<a href="{{ path('orga.index') }}" data-target="body"  class="ui basic inverted button">
+    <i class="factory icon"></i>Organisations
+</a>
+{% endblock %}
+{% block body %}
+{{ parent() }}
+
+
+<div class="ui attached segment">
+    <a href="{{ path('orga.index') }}" data-target="body"  class="ui olive basic button">
+        <i class="plus icon"></i>Ajoutez une Organisation
+    </a>
+    <div class="ui secondary segment">
+        <div class="">
+            <i class="edit icon"></i> Ajout
+        </div>
+    </div>
+    {{ q['frm-orga']|raw}}
+    {{ script_foot|raw}}
+</div>
+
+{% endblock %}

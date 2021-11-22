@@ -1,0 +1,14 @@
+{%  extends "GroupController/base.html" %}
+{% block header %}
+<a href="{{ path('orga.index') }}" data-target="body"  class="ui basic inverted button">
+    <i class="factory icon"></i>Organ
+</a>
+{% endblock %}
+{% block body %}
+{{ parent() }}
+<a href="{{ path('group.addGroupe') }}" data-target="body"  class="ui olive basic button">
+    <i class="plus icon"></i>Ajoutez des groupes
+</a>
+<h1>Groupe</h1>
+
+{% endblock %}

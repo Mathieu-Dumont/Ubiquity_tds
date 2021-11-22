@@ -1,23 +1,7 @@
-#.gitignore file
-vendor/
-app/cache/
-app/logs/
- 
-# Eclipse
-.settings/
-.project
 .buildpath
- 
-# PhpStorm
+.project
+.settings/
+vendor/
+app/logs/
+app/cache/
 .idea/
- 
-# VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
- 
-# Local History for Visual Studio Code
-.history/
