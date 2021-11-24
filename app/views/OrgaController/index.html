@@ -1,20 +1,18 @@
 {%  extends "OrgaController/base.html" %}
 {% block header %}
-<a href="{{ path('orgas.index') }}" data-target="body"  class="ui basic inverted button">
+<a href="{{ path('orga.index') }}" data-target="body"  class="ui basic inverted button">
     <i class="factory icon"></i>Organisations
 </a>
-<a href="{{ path('groupe.addGroupe') }}" data-target="body"  class="ui basic inverted button">
-    <i class="factory icon"></i>Ajoutez un groupe
+<a href="{{ path('group.addGroupe') }}" data-target="body"  class="ui basic inverted button">
+    <i class="plus icon"></i>Ajoutez un groupe
 </a>
 <a href="{{ path('orga.orgaAdd') }}" data-target="body"  class="ui basic inverted button">
-    <i class="factory icon"></i>Ajoutez une organization
+    <i class="plus icon"></i>Ajoutez une organization
 </a>
+
 {% endblock %}
 {% block body %}
 {{ parent() }}
-<a href="{{ path('orga.orgaAdd') }}" data-target="body"  class="ui olive basic button">
-    <i class="plus icon"></i>Ajoutez une Organisation
-</a>
 <h1>Organisations</h1>
 {% for orga in all %}
 <div class="ui list">

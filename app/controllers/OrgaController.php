@@ -23,7 +23,7 @@ class OrgaController extends \controllers\ControllerBase{
         $this->repo??=new ViewRepository($this,Organization::class);
     }
 
-    #[Route(path: '/orgas', name: 'orgas.index')]
+    #[Route('/orgas')]
     public function index(){
         $this->repo->all();
         $this->loadView("OrgaController/index.html");
