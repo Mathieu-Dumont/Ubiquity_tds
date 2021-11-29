@@ -38,8 +38,9 @@ return array(
 			"rest"=>""
 			],
 	"onError"=>function ($code, $message = NULL, $controllerInstance = NULL){
-				switch ($code){
-					case 404:case 500:
+				switch ($code) {
+					case 404:
+					case 500:
 						throw new \Exception($message);
 						break;
 				}

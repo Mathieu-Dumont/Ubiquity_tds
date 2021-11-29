@@ -22,6 +22,10 @@ use services\ui\UIGroups;
 #[Route(path: "/group/",inherited: true,automated: true)]
 class CrudGroupController extends \Ubiquity\controllers\crud\CRUDController{
 
+    private function showMessage($title,$text,$type,$icon){
+        $this->loadView('CrudGroupController/message.html',compact('icon','title','type','text'));
+    }
+
     public function initialize() {
         $this->ui=new UIGroups($this);
         parent::initialize();
